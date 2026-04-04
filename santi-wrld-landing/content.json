@@ -1,0 +1,140 @@
+{
+  "brand": {
+    "name": "SANTI WRLD",
+    "tagline": "LOVE NEVER DIES",
+    "year": 2026
+  },
+
+  "socials": {
+    "tiktok": "https://www.tiktok.com/@sntdept",
+    "tiktokHandle": "@sntdept",
+    "instagram": "https://instagram.com/sntdept",
+    "instagramHandle": "@sntdept"
+  },
+
+  "hero": {
+    "preHeading": "",
+    "titleLine1": "SANTI",
+    "titleLine2": "WRLD",
+    "subtitle": "Nigerian streetwear energy. Raw visuals. Limited drops. Love never dies.",
+    "ctaPrimary": "Join the Waitlist",
+    "ctaSecondary": "View Pieces",
+    "image": "/images/hero.jpg"
+  },
+
+  "marquee": [
+    "SANTI WRLD",
+    "SRNTZ",
+    "LOVE NEVER DIES",
+    "@SNTDEPT",
+    "ROCKSTAR",
+    "NEXT DROP SOON"
+  ],
+
+  "collections": {
+    "srntz": {
+      "title": "SRNTZ Collection",
+      "accent": "red",
+      "pieces": [
+        {
+          "slug": "srntz-core-tee",
+          "name": "SRNTZ Core Tee",
+          "subtitle": "Black tee with red graffiti front print",
+          "price": "₦15,000",
+          "priceKobo": 1500000,
+          "image": "/images/srntz-core-1.jpg"
+        },
+        {
+          "slug": "srntz-rockstar-backprint",
+          "name": "SRNTZ Rockstar Backprint",
+          "subtitle": "Oversized black tee with ROCKSTAR back art",
+          "price": "₦18,000",
+          "priceKobo": 1800000,
+          "image": "/images/srntz-rockstar-1.jpg"
+        },
+        {
+          "slug": "srntz-night-drop",
+          "name": "SRNTZ Night Drop",
+          "subtitle": "Street-lit editorial fit",
+          "price": "₦15,000",
+          "priceKobo": 1500000,
+          "image": "/images/srntz-night-2.jpg"
+        },
+        {
+          "slug": "srntz-duo-shot",
+          "name": "SRNTZ Duo Shot",
+          "subtitle": "Signature red logo in low-light campaign",
+          "price": "₦15,000",
+          "priceKobo": 1500000,
+          "image": "/images/srntz-night-1.jpg"
+        }
+      ]
+    },
+    "lnd": {
+      "title": "Love Never Dies",
+      "accent": "gold",
+      "pieces": [
+        {
+          "slug": "lnd-polo",
+          "name": "Love Never Dies Polo",
+          "subtitle": "Black polo with gold script detailing",
+          "price": "₦20,000",
+          "priceKobo": 2000000,
+          "image": "/images/lnd-polo-1.jpg"
+        },
+        {
+          "slug": "sw-performance-crop",
+          "name": "SW Performance Crop",
+          "subtitle": "Black-and-white cropped fit",
+          "price": "₦12,000",
+          "priceKobo": 1200000,
+          "image": "/images/sw-crop-1.jpg"
+        },
+        {
+          "slug": "sw-performance-crop-ii",
+          "name": "SW Performance Crop II",
+          "subtitle": "Athletic silhouette with SW mark",
+          "price": "₦12,000",
+          "priceKobo": 1200000,
+          "image": "/images/sw-crop-2.jpg"
+        },
+        {
+          "slug": "lnd-trio",
+          "name": "Love Never Dies Trio",
+          "subtitle": "Group campaign colorway",
+          "price": "₦20,000",
+          "priceKobo": 2000000,
+          "image": "/images/lnd-polo-2.jpg"
+        }
+      ]
+    }
+  },
+
+  "lookbook": [
+    "/images/lookbook-1.jpg",
+    "/images/lookbook-2.jpg",
+    "/images/lookbook-3.jpg",
+    "/images/lookbook-4.jpg",
+    "/images/lookbook-5.jpg",
+    "/images/lookbook-6.jpg",
+    "/images/lookbook-7.jpg",
+    "/images/lookbook-8.jpg"
+  ],
+
+  "campaignVideo": "/images/campaign.mp4",
+
+  "comingSoon": {
+    "preHeading": "Upcoming drop",
+    "heading": "NEXT DROP LOADING",
+    "description": "New cut. New energy. Limited pieces only. Join the waitlist to get notified first.",
+    "dropDate": "2026-05-01T12:00:00+01:00"
+  },
+
+  "signup": {
+    "preHeading": "Waitlist",
+    "headingStart": "BE THE FIRST",
+    "headingAccent": "TO KNOW",
+    "description": "Get early access alerts for new SANTI WRLD pieces and campaign drops.",
+    "successMessage": "You're in. We will alert you before the drop."
+  }
+}
