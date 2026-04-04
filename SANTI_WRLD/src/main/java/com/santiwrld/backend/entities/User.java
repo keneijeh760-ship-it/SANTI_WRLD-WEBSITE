@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.security.Timestamp;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -35,5 +36,7 @@ public class User extends AuditEntity {
     @Column(name = "user_role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.CUSTOMER;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Order> orders;
 
 }
