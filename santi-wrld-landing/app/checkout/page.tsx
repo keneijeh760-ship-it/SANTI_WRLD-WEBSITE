@@ -149,7 +149,7 @@ export default function CheckoutPage() {
     );
   }
 
-  if (items.length === 0 && status !== "success") {
+  if (items.length === 0) {
     return (
       <div className="bg-brand-black text-white">
         <NavBar />
