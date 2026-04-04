@@ -11,6 +11,7 @@ type Props = {
   accent: "red" | "gold";
   pieces: Piece[];
   sectionId?: string;
+  showCart?: boolean;
 };
 
 function AddToCartButton({ piece, accent }: { piece: Piece; accent: "red" | "gold" }) {
@@ -50,7 +51,7 @@ function AddToCartButton({ piece, accent }: { piece: Piece; accent: "red" | "gol
   );
 }
 
-export default function CollectionGrid({ title, accent, pieces, sectionId }: Props) {
+export default function CollectionGrid({ title, accent, pieces, sectionId, showCart = false }: Props) {
   const accentClass = accent === "red" ? "text-brand-red" : "text-brand-gold";
   const words = title.split(" ");
   const lastWord = words[words.length - 1];
@@ -73,10 +74,14 @@ export default function CollectionGrid({ title, accent, pieces, sectionId }: Pro
             <div className="flex flex-1 flex-col p-4">
               <h3 className="display-font text-2xl leading-none text-white">{piece.name}</h3>
               <p className="mt-2 text-sm text-zinc-300">{piece.subtitle}</p>
-              <p className={`mt-3 text-lg font-bold ${accentClass}`}>{piece.price}</p>
-              <div className="mt-auto">
-                <AddToCartButton piece={piece} accent={accent} />
-              </div>
+              {showCart && (
+                <>
+                  <p className={`mt-3 text-lg font-bold ${accentClass}`}>{piece.price}</p>
+                  <div className="mt-auto">
+                    <AddToCartButton piece={piece} accent={accent} />
+                  </div>
+                </>
+              )}
             </div>
           </article>
         ))}

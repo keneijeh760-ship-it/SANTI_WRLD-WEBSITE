@@ -33,7 +33,7 @@
 
   "collections": {
     "srntz": {
-      "title": "SRNTZ Collection",
+      "title": "ROCKSTAR Collection",
       "accent": "red",
       "pieces": [
         {
@@ -78,32 +78,32 @@
           "slug": "lnd-polo",
           "name": "Love Never Dies Polo",
           "subtitle": "Black polo with gold script detailing",
-          "price": "₦20,000",
-          "priceKobo": 2000000,
+          "price": "DM to order",
+          "priceKobo": 0,
           "image": "/images/lnd-polo-1.jpg"
         },
         {
           "slug": "sw-performance-crop",
           "name": "SW Performance Crop",
           "subtitle": "Black-and-white cropped fit",
-          "price": "₦12,000",
-          "priceKobo": 1200000,
+          "price": "DM to order",
+          "priceKobo": 0,
           "image": "/images/sw-crop-1.jpg"
         },
         {
           "slug": "sw-performance-crop-ii",
           "name": "SW Performance Crop II",
           "subtitle": "Athletic silhouette with SW mark",
-          "price": "₦12,000",
-          "priceKobo": 1200000,
+          "price": "DM to order",
+          "priceKobo": 0,
           "image": "/images/sw-crop-2.jpg"
         },
         {
           "slug": "lnd-trio",
           "name": "Love Never Dies Trio",
           "subtitle": "Group campaign colorway",
-          "price": "₦20,000",
-          "priceKobo": 2000000,
+          "price": "DM to order",
+          "priceKobo": 0,
           "image": "/images/lnd-polo-2.jpg"
         }
       ]
