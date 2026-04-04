@@ -1,5 +1,6 @@
 package com.santiwrld.backend.entities;
 
+import com.santiwrld.backend.config.audit.AuditEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.security.Timestamp;
 @AllArgsConstructor
 @Getter
 @Setter
-public class User {
+public class User extends AuditEntity {
     @Id
     @SequenceGenerator(name = "user",
     sequenceName = "user",
@@ -34,8 +35,5 @@ public class User {
     @Column(name = "user_role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.CUSTOMER;
-    @Column(nullable = false, unique = false, name = "created_at")
-    private Timestamp createdAt;
-    @Column(nullable = false, unique = false, name = "updated_at")
-    private Timestamp updatedAt;
+
 }
