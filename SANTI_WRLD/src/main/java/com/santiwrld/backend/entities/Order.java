@@ -42,6 +42,8 @@ public class Order extends AuditEntity {
     @Column(name = "order_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+    private String paymentReference;
+
 
 
 
