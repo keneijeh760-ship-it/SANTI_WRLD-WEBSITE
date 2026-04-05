@@ -2,18 +2,17 @@ package com.santiwrld.backend.entities;
 
 import com.santiwrld.backend.config.audit.AuditEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Order extends AuditEntity {
     @Id
     @SequenceGenerator(name = "order",
@@ -27,6 +26,8 @@ public class Order extends AuditEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_order_id", nullable = false)
     private User user;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
     @Column(nullable = false, unique = false, name = "customer_name")
     private String customerName;
     @Column(nullable = false, unique = true, name = "customer_email")

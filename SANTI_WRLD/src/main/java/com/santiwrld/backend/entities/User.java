@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.security.Timestamp;
+
 import java.util.List;
 
 @Entity
@@ -29,14 +29,14 @@ public class User extends AuditEntity {
     private String lastName;
     @Column(unique = true, nullable = false, name = "email")
     private String email;
-    @Column(unique = true, nullable = true, name = "phoneNumber")
-    private int phoneNumber;
-    @Column(name = "password", nullable = false, unique = true)
+    @Column(unique = true, nullable = true, name = "phone_number")
+    private String phoneNumber;
+    @Column(name = "password", nullable = false, unique = false)
     private String password;
     @Column(name = "user_role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.CUSTOMER;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Order> orders;
 
 }
