@@ -18,12 +18,15 @@ public class OrderItem {
     @SequenceGenerator(name = "order_item",
             sequenceName = "order_item",
             allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_itm")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_item")
     @Column(unique = true, nullable = false, name = "order_item_id")
     private Long Id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_item_id", nullable = false)
     private Product product;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
     @Column(name = "product_name", unique = true, nullable = false)
     private String productName;
     private BigDecimal price;
