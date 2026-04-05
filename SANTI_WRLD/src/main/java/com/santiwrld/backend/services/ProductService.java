@@ -1,5 +1,6 @@
 package com.santiwrld.backend.services;
 
+import com.santiwrld.backend.dtos.ProductUpdateDTO;
 import com.santiwrld.backend.entities.Product;
 import com.santiwrld.backend.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,22 @@ public class ProductService {
         return collect;
     }
 
-    public Product create(Product product){}
+    public Product update(Long id, ProductUpdateDTO dto){
+        productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        Product product = Product
+                .builder()
+                .productName(dto.getProductName())
+                .description(dto.getProductDescription())
+                .price(dto.getProductPrice())
+                .isActive(dto.getActive())
+                .stockQuantity(dto.getStockQuantity())
+                .imageUrl(dto.getImageUrl())
+                .build();
+        productRepository.save(product);
+        return product;
+    }
 
 
 }

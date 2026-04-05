@@ -2,10 +2,7 @@ package com.santiwrld.backend.entities;
 
 import com.santiwrld.backend.config.audit.AuditEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -14,6 +11,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Product extends AuditEntity {
     @Id
     @SequenceGenerator(name = "product",
