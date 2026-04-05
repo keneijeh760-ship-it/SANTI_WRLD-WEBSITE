@@ -1,7 +1,9 @@
 package com.santiwrld.backend.dtos;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,8 +16,9 @@ import java.math.BigDecimal;
 public class OrderItemDTO {
     @NotBlank
     private String productName;
-    @NotBlank
+    @NotNull
     private BigDecimal price;
-    @NotBlank
+    @NotNull
+    @Min(1)
     private int quantity;
 }

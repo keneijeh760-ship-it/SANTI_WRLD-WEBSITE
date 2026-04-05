@@ -2,6 +2,7 @@ package com.santiwrld.backend.dtos;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +21,7 @@ public class CreateProductDTO {
     private String description;
     @NotBlank
     private String imageUrl;
-    @NotBlank
+    @NotNull
     private BigDecimal price;
     @NotBlank
     private String collection;

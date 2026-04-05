@@ -5,6 +5,7 @@ package com.santiwrld.backend.dtos;
 import com.santiwrld.backend.entities.OrderStatus;
 import com.santiwrld.backend.entities.PaymentStatus;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,26 +19,26 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class OrderResponseDTO {
-    @NotBlank
-    private Long Id;
+    @NotNull
+    private Long id;
     @NotBlank
     private String orderReference;
     @NotBlank
     private String customerName;
     @NotBlank
     private String customerEmail;
-    @NotBlank
+    @NotNull
     private BigDecimal totalPrice;
     @NotBlank
     private String displayTotalPrice;
-    @NotBlank
+    @NotNull
     @ToString.Exclude
     private OrderStatus status;
-    @NotBlank
+    @NotNull
     @ToString.Exclude
     private PaymentStatus paymentStatus;
-    @NotBlank
+    @NotNull
     private Instant createdAt;
-    @NotBlank
+    @NotNull
     private List<OrderItemDTO> items;
 }

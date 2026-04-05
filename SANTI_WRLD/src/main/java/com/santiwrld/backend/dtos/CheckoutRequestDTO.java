@@ -26,7 +26,7 @@ public class CheckoutRequestDTO {
     @NotBlank
     private String state;
     @NotBlank
-    private List<OrderItem> items;
+    private List<CartItemDTO> items;
 
 
 }
