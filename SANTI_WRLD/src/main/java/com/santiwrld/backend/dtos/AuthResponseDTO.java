@@ -2,6 +2,8 @@ package com.santiwrld.backend.dtos;
 
 import com.santiwrld.backend.entities.UserRole;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,16 +13,17 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 public class AuthResponseDTO {
+    @NotBlank
     private String token;
     @ToString.Exclude
+    @NotBlank
     private UserRole role;
-    @Valid
+    @NotBlank
+    @Email
     private String email;
-    @Valid
-    private String password;
-    @Valid
+    @NotBlank
     private String firstName;
-    @Valid
+    @NotBlank
     private String lastName;
 
 }

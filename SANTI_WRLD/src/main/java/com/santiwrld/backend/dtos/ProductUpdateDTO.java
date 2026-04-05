@@ -1,6 +1,7 @@
 package com.santiwrld.backend.dtos;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -11,16 +12,16 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductUpdateDTO {
-    @Valid
+    @NotBlank
     private String productName;
-    @Valid
+    @NotBlank
     private String productDescription;
-    @Valid
+    @NotBlank
     private BigDecimal productPrice;
-    @Valid
+    @NotBlank
     private Boolean active;
-    @Valid
-    private int stockQuantity;
-    @Valid
+    @NotBlank
+    private Integer stockQuantity;
+    @NotBlank
     private String imageUrl;
 }

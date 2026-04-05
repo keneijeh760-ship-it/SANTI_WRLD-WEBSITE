@@ -1,6 +1,9 @@
 package com.santiwrld.backend.dtos;
 
+import com.santiwrld.backend.entities.OrderItem;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.List;
@@ -9,22 +12,21 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class CheckoutRequestDTO {
-    @Valid
-    private String firstName;
-    @Valid
-    private String lastName;
-    @Valid
+    @NotBlank
+    private String fullName;
+    @NotBlank
+    @Email
     private String email;
-    @Valid
+    @NotBlank
     private String phoneNumber;
-    @Valid
+    @NotBlank
     private String address;
-    @Valid
+    @NotBlank
     private String city;
-    @Valid
+    @NotBlank
     private String state;
-    @Valid
-    private List<CartItemDTO> items;
+    @NotBlank
+    private List<OrderItem> items;
 
 
 }

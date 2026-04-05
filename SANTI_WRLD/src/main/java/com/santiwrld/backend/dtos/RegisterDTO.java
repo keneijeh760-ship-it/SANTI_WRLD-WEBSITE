@@ -1,7 +1,9 @@
 package com.santiwrld.backend.dtos;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,13 +13,14 @@ import org.hibernate.validator.constraints.Length;
 @Setter
 @NoArgsConstructor
 public class RegisterDTO {
-    @Valid
+    @NotBlank
     private String firstName;
-    @Valid
+    @NotBlank
     private String lastName;
-    @Valid
+    @NotBlank
+    @Email
     private String email;
-    @Valid
+    @NotBlank
     @Length(min = 8)
     private String password;
 }

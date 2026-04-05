@@ -1,7 +1,6 @@
 package com.santiwrld.backend.dtos;
 
-import com.santiwrld.backend.entities.Product;
-import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class CartItemDTO {
-    @Valid
+    @NotBlank
     private String slug;
-    @Valid
+    @NotBlank
     private int quantity;
 }

@@ -1,30 +1,31 @@
 package com.santiwrld.backend.dtos;
 
-import jakarta.persistence.Id;
-import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class ProductResponseDTO {
-    @Valid
+    @NotBlank
     private Long id;
-    @Valid
+    @NotBlank
     private String slug;
-    @Valid
+    @NotBlank
     private String name;
-    @Valid
+    @NotBlank
     private String description;
-    @Valid
-    private Long price;
-    @Valid
+    @NotBlank
+    private BigDecimal price;
+    @NotBlank
     private String displayPrice;
-    @Valid
+    @NotBlank
     private String imageUrl;
-    @Valid
+    @NotBlank
     private String collection;
 
 
