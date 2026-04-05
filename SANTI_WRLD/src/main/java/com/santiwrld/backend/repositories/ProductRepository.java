@@ -10,6 +10,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<Product> findBySlug(String slug);
     List<Product> findByActiveTrue();
 
-    Optional<Product> findByCollection(String collection);
+    List<Product> findByCollection(String collection);
     
 }

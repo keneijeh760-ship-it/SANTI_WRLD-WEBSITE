@@ -4,7 +4,6 @@ import com.santiwrld.backend.dtos.ProductUpdateDTO;
 import com.santiwrld.backend.entities.Product;
 import com.santiwrld.backend.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,14 +11,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public Product getAllActive(){
+    public List<Product> getAllActive(){
 
         List<Product> active =  productRepository.findByActiveTrue();
-        return active.stream().findFirst().orElse(null);
+        return active;
     }
 
     public Product getBySlug(String slug){
@@ -29,19 +27,23 @@ public class ProductService {
         return sluggy;
     }
 
-    public Product getByCollection(String collection){
-        Product collect =  productRepository.findByCollection(collection)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+    public List<Product> getByCollection(String collection){
+        List<Product> collect =  productRepository.findByCollection(collection);
+
+        if (collect.isEmpty()){
+            return List.of();
+        }
 
         return collect;
     }
 
     public Product update(Long id, ProductUpdateDTO dto){
-        productRepository.findById(id)
+        Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        Product product = Product
+        product = Product
                 .builder()
+                .Id(product.getId())
                 .productName(dto.getProductName())
                 .description(dto.getProductDescription())
                 .price(dto.getProductPrice())
@@ -49,8 +51,8 @@ public class ProductService {
                 .stockQuantity(dto.getStockQuantity())
                 .imageUrl(dto.getImageUrl())
                 .build();
-        productRepository.save(product);
-        return product;
+
+        return  productRepository.save(product);
     }
 
 
