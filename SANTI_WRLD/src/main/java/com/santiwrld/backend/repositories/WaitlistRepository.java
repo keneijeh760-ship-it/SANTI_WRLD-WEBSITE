@@ -10,4 +10,5 @@ public interface WaitlistRepository extends JpaRepository<WaitlistEntry, Long> {
     Optional<WaitlistEntry> findByEmail(String email);
 
     boolean existsByEmail(String email);
+
 }
