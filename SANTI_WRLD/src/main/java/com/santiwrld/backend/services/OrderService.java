@@ -23,7 +23,7 @@ public class OrderService {
                 .deliveryAddress(order.getAddress())
                 .city(order.getCity())
                 .state(order.getState())
-                .orderItems(order.getItems())
+                .cartItems(order.getItems())
                 .orderStatus(OrderStatus.PENDING)
                 .build();
 
@@ -43,6 +43,17 @@ public class OrderService {
 
         return emailSearch;
 
+    }
+
+    public void updateStatus(Long id, OrderStatus status) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Order not found"));
+
+        if (order.getOrderStatus().equals(status)) {
+            throw new RuntimeException("Order status already set");
+        }
+
+        order.setOrderStatus(status);
     }
 
 

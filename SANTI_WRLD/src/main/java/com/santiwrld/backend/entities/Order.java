@@ -1,6 +1,7 @@
 package com.santiwrld.backend.entities;
 
 import com.santiwrld.backend.config.audit.AuditEntity;
+import com.santiwrld.backend.dtos.CartItemDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -47,6 +48,7 @@ public class Order extends AuditEntity {
     @Column(name = "payment_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
+    private List<CartItemDTO> cartItems;
 
 
 
