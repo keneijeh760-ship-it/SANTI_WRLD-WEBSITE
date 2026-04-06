@@ -4,6 +4,7 @@ import com.santiwrld.backend.entities.OrderItem;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class CheckoutRequestDTO {
     private String city;
     @NotBlank
     private String state;
-    @NotBlank
+    @NotNull
     private List<CartItemDTO> items;
 
 
