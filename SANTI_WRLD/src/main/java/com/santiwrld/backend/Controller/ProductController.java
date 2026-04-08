@@ -1,10 +1,14 @@
 package com.santiwrld.backend.Controller;
 
+import com.santiwrld.backend.dtos.CreateProductDTO;
 import com.santiwrld.backend.dtos.ProductResponseDTO;
+import com.santiwrld.backend.dtos.ProductUpdateDTO;
 import com.santiwrld.backend.entities.Product;
 import com.santiwrld.backend.repositories.ProductRepository;
 import com.santiwrld.backend.services.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,10 +68,38 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createProduct(@RequestBody Product product) {
-         productService.createProduct(product);
-         return ResponseEntity.ok().build();
+    public ResponseEntity<ProductResponseDTO> createProduct(@Valid @RequestBody CreateProductDTO product) {
+         Product service = productService.createProduct(product);
+         ProductResponseDTO response = ProductResponseDTO.builder()
+                 .id(service.getId())
+                 .slug(service.getSlug())
+                 .name(service.getProductName())
+                 .description(service.getDescription())
+                 .price(service.getPrice())
+                 .displayPrice(service.getPrice().toString())
+                 .imageUrl(service.getImageUrl())
+                 .collection(service.getCollection())
+                 .build();
 
+         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ProductResponseDTO> updateProduct(@Valid ProductUpdateDTO product, @PathVariable Long id) {
+        Product update = productService.update(id,  product);
+        ProductResponseDTO responseDTO =  ProductResponseDTO.builder()
+                .id(update.getId())
+                .slug(update.getSlug())
+                .name(update.getProductName())
+                .description(update.getDescription())
+                .price(update.getPrice())
+                .displayPrice(update.getPrice().toString())
+                .imageUrl(update.getImageUrl())
+                .collection(update.getCollection())
+                .build();
+
+        return ResponseEntity.ok(responseDTO);
     }
 
 

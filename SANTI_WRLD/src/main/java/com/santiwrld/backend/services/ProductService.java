@@ -27,18 +27,23 @@ public class ProductService {
 
         return sluggy;
     }
+    @Transactional
+    public Product createProduct(CreateProductDTO product){
+        if (productRepository.findBySlug(product.getSlug()).isPresent()){
+            throw new IllegalStateException("Product already exists");
+        }
 
-    public void createProduct(Product product){
-        CreateProductDTO createProductDTO = CreateProductDTO
-                .builder()
+        Product productEntity = Product.builder()
                 .slug(product.getSlug())
-                .name(product.getProductName())
+                .productName(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
-                .collection(product.getCollection())
                 .imageUrl(product.getImageUrl())
-                .build();
-        productRepository.save(product);
+                .collection(product.getCollection())
+                .isActive(true)
+                .stockQuantity(0).build();
+        return productRepository.save(productEntity);
+
 
     }
 
@@ -59,10 +64,12 @@ public class ProductService {
         product = Product
                 .builder()
                 .Id(product.getId())
+                .slug(product.getSlug())
                 .productName(dto.getProductName())
                 .description(dto.getProductDescription())
                 .price(dto.getProductPrice())
                 .isActive(dto.getActive())
+                .collection(product.getCollection())
                 .stockQuantity(dto.getStockQuantity())
                 .imageUrl(dto.getImageUrl())
                 .build();
