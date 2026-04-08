@@ -1,6 +1,7 @@
 package com.santiwrld.backend.services;
 
 import com.santiwrld.backend.dtos.CreateProductDTO;
+import com.santiwrld.backend.dtos.ProductResponseDTO;
 import com.santiwrld.backend.dtos.ProductUpdateDTO;
 import com.santiwrld.backend.entities.Product;
 import com.santiwrld.backend.repositories.ProductRepository;
@@ -75,6 +76,15 @@ public class ProductService {
                 .build();
 
         return  productRepository.save(product);
+    }
+
+    public void deleteProduct(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        productRepository.delete(product);
+
+
     }
 
 
