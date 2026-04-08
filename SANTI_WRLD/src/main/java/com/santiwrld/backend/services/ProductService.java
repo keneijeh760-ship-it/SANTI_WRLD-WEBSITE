@@ -1,5 +1,6 @@
 package com.santiwrld.backend.services;
 
+import com.santiwrld.backend.dtos.CreateProductDTO;
 import com.santiwrld.backend.dtos.ProductUpdateDTO;
 import com.santiwrld.backend.entities.Product;
 import com.santiwrld.backend.repositories.ProductRepository;
@@ -25,6 +26,20 @@ public class ProductService {
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
         return sluggy;
+    }
+
+    public void createProduct(Product product){
+        CreateProductDTO createProductDTO = CreateProductDTO
+                .builder()
+                .slug(product.getSlug())
+                .name(product.getProductName())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .collection(product.getCollection())
+                .imageUrl(product.getImageUrl())
+                .build();
+        productRepository.save(product);
+
     }
 
     public List<Product> getByCollection(String collection){
