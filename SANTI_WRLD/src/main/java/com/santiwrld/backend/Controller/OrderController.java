@@ -8,6 +8,7 @@ import com.santiwrld.backend.entities.OrderItem;
 import com.santiwrld.backend.services.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +41,8 @@ public class OrderController {
 
                 .items(maptodto(order.getOrderItems()))
                 .build();
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderResponse);
 
     }
     private List<OrderItemDTO> maptodto (List<OrderItem> orderItems){

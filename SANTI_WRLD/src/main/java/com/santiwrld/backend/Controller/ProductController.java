@@ -102,6 +102,33 @@ public class ProductController {
         return ResponseEntity.ok(responseDTO);
     }
 
+    @GetMapping
+    public ResponseEntity<List<ProductResponseDTO>> getAllProductsByCollection(@RequestParam String collection) {
+        List<Product> collectionCheck = productService.getByCollection(collection);
+
+        List<ProductResponseDTO> list = new ArrayList<>();
+
+        for  (Product product : collectionCheck) {
+            ProductResponseDTO productResponseDTO = ProductResponseDTO.builder()
+                    .id(product.getId())
+                    .collection(product.getCollection())
+                    .description(product.getDescription())
+                    .name(product.getProductName())
+                    .slug(product.getSlug())
+                    .price(product.getPrice())
+                    .displayPrice(product.getPrice().toString())
+                    .imageUrl(product.getImageUrl())
+                    .build();
+
+            list.add(productResponseDTO);
+
+        }
+
+        return ResponseEntity.ok(list);
+
+
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);

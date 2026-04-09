@@ -26,7 +26,7 @@ public class OrderService {
                 .deliveryAddress(order.getAddress())
                 .city(order.getCity())
                 .state(order.getState())
-                .orderItems(order.getItems())
+                .orderItems(order.g)
                 .orderStatus(OrderStatus.PENDING)
                 .build();
 
