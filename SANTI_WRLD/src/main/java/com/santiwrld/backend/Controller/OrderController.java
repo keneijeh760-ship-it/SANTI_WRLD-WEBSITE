@@ -53,6 +53,15 @@ public class OrderController {
                 .orderReference(order.getOrderReference())
                 .customerEmail(order.getCustomerEmail())
                 .totalPrice(order.getTotalPrice())
+                .customerName(order.getCustomerName())
+                .createdAt(order.getCreatedAt())
+                .paymentStatus(order.getPaymentStatus())
+                .displayTotalPrice(order.getTotalPrice().toString())
+                .status(order.getOrderStatus())
+                .items(maptodto(order.getOrderItems()))
+                .build();
+        return ResponseEntity.ok(responseDTO);
+
 
     }
     private List<OrderItemDTO> maptodto (List<OrderItem> orderItems){
