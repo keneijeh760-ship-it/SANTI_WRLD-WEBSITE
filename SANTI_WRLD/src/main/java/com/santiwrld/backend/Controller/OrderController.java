@@ -64,6 +64,33 @@ public class OrderController {
 
 
     }
+
+    @GetMapping
+    public ResponseEntity<List<OrderResponseDTO>> getOrdersByEmail(@RequestParam @Valid @RequestBody String email){
+        List<Order> orders = orderService.getByEmail(email);
+
+        List<OrderResponseDTO> ordersList = new ArrayList<>();
+
+        for (Order order : orders) {
+            OrderResponseDTO responseDTO = OrderResponseDTO
+                    .builder()
+                    .totalPrice(order.getTotalPrice())
+                    .orderReference(order.getOrderReference())
+                    .id(order.getId())
+                    .status(order.getOrderStatus())
+                    .displayTotalPrice(order.getTotalPrice().toString())
+                    .customerEmail(order.getCustomerEmail())
+                    .paymentStatus(order.getPaymentStatus())
+                    .customerName(order.getCustomerName())
+                    .createdAt(order.getCreatedAt())
+                    .items(maptodto(order.getOrderItems()))
+                    .build();
+
+            ordersList.add(responseDTO);
+        }
+
+        return ResponseEntity.ok(ordersList);
+    }
     private List<OrderItemDTO> maptodto (List<OrderItem> orderItems){
 
         List<OrderItemDTO> orderItemDTOS = new ArrayList<>();
