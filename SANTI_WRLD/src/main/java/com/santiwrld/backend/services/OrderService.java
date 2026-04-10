@@ -26,7 +26,7 @@ public class OrderService {
                 .deliveryAddress(order.getAddress())
                 .city(order.getCity())
                 .state(order.getState())
-                .orderItems(order.g)
+                .orderItems(order.getItems())
                 .orderStatus(OrderStatus.PENDING)
                 .build();
 
@@ -48,7 +48,7 @@ public class OrderService {
 
     }
 
-    public void updateStatus(Long id, OrderStatus status) {
+    public Order updateStatus(Long id, OrderStatus status) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Order not found"));
 
@@ -57,6 +57,8 @@ public class OrderService {
         }
 
         order.setOrderStatus(status);
+
+        return orderRepository.save(order);
     }
 
     private List<OrderItemDTO> maptodto (List<OrderItem> orderItems){

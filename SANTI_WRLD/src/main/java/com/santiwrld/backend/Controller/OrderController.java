@@ -5,6 +5,7 @@ import com.santiwrld.backend.dtos.OrderItemDTO;
 import com.santiwrld.backend.dtos.OrderResponseDTO;
 import com.santiwrld.backend.entities.Order;
 import com.santiwrld.backend.entities.OrderItem;
+import com.santiwrld.backend.entities.OrderStatus;
 import com.santiwrld.backend.services.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -90,6 +91,27 @@ public class OrderController {
         }
 
         return ResponseEntity.ok(ordersList);
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<OrderResponseDTO>  updateStatus (@Valid @PathVariable Long id, @RequestParam @Valid @RequestBody OrderStatus orderStatus){
+        Order order = orderService.updateStatus(id, orderStatus);
+
+        OrderResponseDTO responseDTO = OrderResponseDTO
+                .builder()
+                .totalPrice(order.getTotalPrice())
+                .orderReference(order.getOrderReference())
+                .id(order.getId())
+                .status(order.getOrderStatus())
+                .displayTotalPrice(order.getTotalPrice().toString())
+                .customerEmail(order.getCustomerEmail())
+                .paymentStatus(order.getPaymentStatus())
+                .customerName(order.getCustomerName())
+                .createdAt(order.getCreatedAt())
+                .items(maptodto(order.getOrderItems()))
+                .build();
+
+        return ResponseEntity.ok(responseDTO);
     }
     private List<OrderItemDTO> maptodto (List<OrderItem> orderItems){
 
