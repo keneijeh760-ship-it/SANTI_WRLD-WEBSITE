@@ -1,12 +1,15 @@
 package com.santiwrld.backend.services;
 
 import com.santiwrld.backend.dtos.CheckoutRequestDTO;
+import com.santiwrld.backend.dtos.OrderItemDTO;
 import com.santiwrld.backend.entities.Order;
+import com.santiwrld.backend.entities.OrderItem;
 import com.santiwrld.backend.entities.OrderStatus;
 import com.santiwrld.backend.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,7 +26,7 @@ public class OrderService {
                 .deliveryAddress(order.getAddress())
                 .city(order.getCity())
                 .state(order.getState())
-                .cartItems(order.getItems())
+                .orderItems(order.getItems())
                 .orderStatus(OrderStatus.PENDING)
                 .build();
 
@@ -45,7 +48,7 @@ public class OrderService {
 
     }
 
-    public void updateStatus(Long id, OrderStatus status) {
+    public Order updateStatus(Long id, OrderStatus status) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Order not found"));
 
@@ -54,6 +57,26 @@ public class OrderService {
         }
 
         order.setOrderStatus(status);
+
+        return orderRepository.save(order);
+    }
+
+    private List<OrderItemDTO> maptodto (List<OrderItem> orderItems){
+
+        List<OrderItemDTO> orderItemDTOS = new ArrayList<>();
+
+        for (OrderItem orderItem : orderItems){
+            OrderItemDTO dto = OrderItemDTO.builder()
+                    .productName(orderItem.getProductName())
+                    .price(orderItem.getPrice())
+                    .quantity(orderItem.getQuantity())
+                    .build();
+            orderItemDTOS.add(dto);
+
+        }
+
+        return orderItemDTOS;
+
     }
 
 

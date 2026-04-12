@@ -1,5 +1,7 @@
 package com.santiwrld.backend.services;
 
+import com.santiwrld.backend.dtos.CreateProductDTO;
+import com.santiwrld.backend.dtos.ProductResponseDTO;
 import com.santiwrld.backend.dtos.ProductUpdateDTO;
 import com.santiwrld.backend.entities.Product;
 import com.santiwrld.backend.repositories.ProductRepository;
@@ -26,6 +28,25 @@ public class ProductService {
 
         return sluggy;
     }
+    @Transactional
+    public Product createProduct(CreateProductDTO product){
+        if (productRepository.findBySlug(product.getSlug()).isPresent()){
+            throw new IllegalStateException("Product already exists");
+        }
+
+        Product productEntity = Product.builder()
+                .slug(product.getSlug())
+                .productName(product.getName())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .imageUrl(product.getImageUrl())
+                .collection(product.getCollection())
+                .isActive(true)
+                .stockQuantity(0).build();
+        return productRepository.save(productEntity);
+
+
+    }
 
     public List<Product> getByCollection(String collection){
         List<Product> collect =  productRepository.findByCollection(collection);
@@ -44,15 +65,26 @@ public class ProductService {
         product = Product
                 .builder()
                 .Id(product.getId())
+                .slug(product.getSlug())
                 .productName(dto.getProductName())
                 .description(dto.getProductDescription())
                 .price(dto.getProductPrice())
                 .isActive(dto.getActive())
+                .collection(product.getCollection())
                 .stockQuantity(dto.getStockQuantity())
                 .imageUrl(dto.getImageUrl())
                 .build();
 
         return  productRepository.save(product);
+    }
+    @Transactional
+    public void deleteProduct(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        productRepository.delete(product);
+
+
     }
 
 

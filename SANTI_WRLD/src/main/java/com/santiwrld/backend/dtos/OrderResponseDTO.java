@@ -6,10 +6,7 @@ import com.santiwrld.backend.entities.OrderStatus;
 import com.santiwrld.backend.entities.PaymentStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -18,6 +15,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrderResponseDTO {
     @NotNull
     private Long id;

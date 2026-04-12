@@ -27,11 +27,11 @@ public class Order extends AuditEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_order_id", nullable = false)
     private User user;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order")
     private List<OrderItem> orderItems;
     @Column(nullable = false, unique = false, name = "customer_name")
     private String customerName;
-    @Column(nullable = false, unique = true, name = "customer_email")
+    @Column(nullable = false, unique = false, name = "customer_email")
     private String customerEmail;
     @Column(nullable = false, unique = false, name = "delivery_addres")
     private String deliveryAddress;
@@ -39,7 +39,7 @@ public class Order extends AuditEntity {
     private String customerPhone;
     private String city;
     private String state;
-    @Transient
+    @Column(nullable = false)
     private BigDecimal totalPrice;
     @Column(name = "order_status", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -48,7 +48,7 @@ public class Order extends AuditEntity {
     @Column(name = "payment_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
-    private List<CartItemDTO> cartItems;
+
 
 
 
