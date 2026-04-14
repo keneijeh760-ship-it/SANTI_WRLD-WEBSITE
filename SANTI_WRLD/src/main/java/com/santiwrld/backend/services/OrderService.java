@@ -1,14 +1,18 @@
 package com.santiwrld.backend.services;
 
+import com.santiwrld.backend.dtos.CartItemDTO;
 import com.santiwrld.backend.dtos.CheckoutRequestDTO;
 import com.santiwrld.backend.dtos.OrderItemDTO;
 import com.santiwrld.backend.entities.Order;
 import com.santiwrld.backend.entities.OrderItem;
 import com.santiwrld.backend.entities.OrderStatus;
+import com.santiwrld.backend.entities.Product;
 import com.santiwrld.backend.repositories.OrderRepository;
+import com.santiwrld.backend.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +20,22 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
 
     public Order createOrder(CheckoutRequestDTO order) {
+        List<OrderItem> lines = new ArrayList<>();
+        BigDecimal total = BigDecimal.ZERO;
+        for (CartItemDTO line : order.getItems()) {
+            Product p = productRepository.findBySlug(line.getSlug()).orElseThrow(() -> new RuntimeException("Product not found"));
+            OrderItem oi = new OrderItem(); // or builder
+            oi.setProduct(p);
+            oi.setProductName(p.getProductName());
+            oi.setPrice(p.getPrice());
+            oi.setQuantity(line.getQuantity());
+            total = total.add(p.getPrice().multiply(BigDecimal.valueOf(line.getQuantity())));
+            lines.add(oi);
+        }
+
         Order neworder = Order
                 .builder()
                 .customerName(order.getFullName())
@@ -26,9 +44,14 @@ public class OrderService {
                 .deliveryAddress(order.getAddress())
                 .city(order.getCity())
                 .state(order.getState())
-                .orderItems(order.getItems())
+                .orderItems(lines)
                 .orderStatus(OrderStatus.PENDING)
                 .build();
+
+        for (OrderItem oi : neworder.getOrderItems()) {
+            oi.setOrder(neworder);
+        }
+
 
         return orderRepository.save(neworder);
     }
