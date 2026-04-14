@@ -88,24 +88,6 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    private List<OrderItemDTO> maptodto (List<OrderItem> orderItems){
-
-        List<OrderItemDTO> orderItemDTOS = new ArrayList<>();
-
-        for (OrderItem orderItem : orderItems){
-            OrderItemDTO dto = OrderItemDTO.builder()
-                    .productName(orderItem.getProductName())
-                    .price(orderItem.getPrice())
-                    .quantity(orderItem.getQuantity())
-                    .build();
-            orderItemDTOS.add(dto);
-
-        }
-
-        return orderItemDTOS;
-
-    }
-
 
 
 
