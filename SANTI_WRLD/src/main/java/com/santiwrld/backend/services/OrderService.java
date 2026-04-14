@@ -3,25 +3,24 @@ package com.santiwrld.backend.services;
 import com.santiwrld.backend.dtos.CartItemDTO;
 import com.santiwrld.backend.dtos.CheckoutRequestDTO;
 import com.santiwrld.backend.dtos.OrderItemDTO;
-import com.santiwrld.backend.entities.Order;
-import com.santiwrld.backend.entities.OrderItem;
-import com.santiwrld.backend.entities.OrderStatus;
-import com.santiwrld.backend.entities.Product;
+import com.santiwrld.backend.entities.*;
 import com.santiwrld.backend.repositories.OrderRepository;
 import com.santiwrld.backend.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
-
+    @Transactional
     public Order createOrder(CheckoutRequestDTO order) {
         List<OrderItem> lines = new ArrayList<>();
         BigDecimal total = BigDecimal.ZERO;
@@ -46,6 +45,11 @@ public class OrderService {
                 .state(order.getState())
                 .orderItems(lines)
                 .orderStatus(OrderStatus.PENDING)
+                .orderReference("SW-" + UUID.randomUUID().toString())
+                .paymentStatus(PaymentStatus.PENDING)
+                .user()
+                .paymentReference(null)
+                .totalPrice(total)
                 .build();
 
         for (OrderItem oi : neworder.getOrderItems()) {

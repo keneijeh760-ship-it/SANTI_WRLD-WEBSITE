@@ -11,16 +11,12 @@ public class WaitlistService {
 
     private final WaitlistRepository waitlistRepository;
     public void addEmail(String email) {
-        boolean waitlistEntry = waitlistRepository.existsByEmail(email);
-
-        WaitlistEntry emailtest = waitlistRepository.findByEmail(email)
-                .orElseThrow(()-> new RuntimeException("User not found"));
-
-        if (!waitlistEntry || emailtest == null) {
-            assert emailtest != null;
-            waitlistRepository.save(emailtest);
-
+        if (waitlistRepository.existsByEmail(email)) {
+            throw new IllegalStateException("This email is already on the waitlist");
         }
+        WaitlistEntry entry = new WaitlistEntry();
+        entry.setEmail(email);
+        waitlistRepository.save(entry);
     }
 
     public WaitlistEntry getAllWaitlistEntry() {

@@ -62,18 +62,8 @@ public class ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));
 
-        product = Product
-                .builder()
-                .Id(product.getId())
-                .slug(product.getSlug())
-                .productName(dto.getProductName())
-                .description(dto.getProductDescription())
-                .price(dto.getProductPrice())
-                .isActive(dto.getActive())
-                .collection(product.getCollection())
-                .stockQuantity(dto.getStockQuantity())
-                .imageUrl(dto.getImageUrl())
-                .build();
+        product.setProductName(dto.getProductName());
+        product.setDescription(dto.getProductDescription());
 
         return  productRepository.save(product);
     }
