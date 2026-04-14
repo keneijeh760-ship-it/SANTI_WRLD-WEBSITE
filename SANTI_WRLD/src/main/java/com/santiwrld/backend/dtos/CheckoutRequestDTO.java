@@ -27,6 +27,7 @@ public class CheckoutRequestDTO {
     @NotBlank
     private String state;
     @NotNull
+    @Valid
     private List<CartItemDTO> items;
 
 
