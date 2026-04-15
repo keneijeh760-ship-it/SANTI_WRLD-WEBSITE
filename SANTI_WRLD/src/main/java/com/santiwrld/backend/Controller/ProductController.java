@@ -102,7 +102,7 @@ public class ProductController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    @GetMapping
+    @GetMapping(params = "collection")
     public ResponseEntity<List<ProductResponseDTO>> getAllProductsByCollection(@RequestParam String collection) {
         List<Product> collectionCheck = productService.getByCollection(collection);
 

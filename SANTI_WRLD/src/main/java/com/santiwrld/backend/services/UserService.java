@@ -1,5 +1,6 @@
 package com.santiwrld.backend.services;
 
+import com.santiwrld.backend.ExceptionHandlers.ResourceNotFound;
 import com.santiwrld.backend.entities.User;
 import com.santiwrld.backend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ public class UserService {
 
     public User findByEmail (String email) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(()-> new RuntimeException("User not found"));
+                .orElseThrow(()-> new ResourceNotFound("User not found"));
 
         return user;
     }

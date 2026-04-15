@@ -67,7 +67,7 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderResponseDTO>> getOrdersByEmail(@RequestParam @Valid @RequestBody String email){
+    public ResponseEntity<List<OrderResponseDTO>> getOrdersByEmail(@RequestParam @Valid  String email){
         List<Order> orders = orderService.getByEmail(email);
 
         List<OrderResponseDTO> ordersList = new ArrayList<>();
@@ -94,7 +94,7 @@ public class OrderController {
     }
 
     @PatchMapping("/{id}/status")
-    public ResponseEntity<OrderResponseDTO>  updateStatus (@Valid @PathVariable Long id, @RequestParam @Valid @RequestBody OrderStatus orderStatus){
+    public ResponseEntity<OrderResponseDTO>  updateStatus (@Valid @PathVariable Long id, @RequestParam @Valid  OrderStatus orderStatus){
         Order order = orderService.updateStatus(id, orderStatus);
 
         OrderResponseDTO responseDTO = OrderResponseDTO
