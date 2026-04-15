@@ -1,5 +1,6 @@
 package com.santiwrld.backend.services;
 
+import com.santiwrld.backend.ExceptionHandlers.ResourceNotFound;
 import com.santiwrld.backend.dtos.CreateProductDTO;
 import com.santiwrld.backend.dtos.ProductResponseDTO;
 import com.santiwrld.backend.dtos.ProductUpdateDTO;
@@ -24,7 +25,7 @@ public class ProductService {
 
     public Product getBySlug(String slug){
         Product sluggy = productRepository.findBySlug(slug)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFound("Product not found"));
 
         return sluggy;
     }
@@ -60,7 +61,7 @@ public class ProductService {
 
     public Product update(Long id, ProductUpdateDTO dto){
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFound("Product not found"));
 
         product.setProductName(dto.getProductName());
         product.setDescription(dto.getProductDescription());
@@ -70,7 +71,7 @@ public class ProductService {
     @Transactional
     public void deleteProduct(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFound("Product not found"));
 
         productRepository.delete(product);
 

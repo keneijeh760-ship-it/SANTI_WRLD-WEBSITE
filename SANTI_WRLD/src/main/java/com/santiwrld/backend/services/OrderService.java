@@ -1,5 +1,6 @@
 package com.santiwrld.backend.services;
 
+import com.santiwrld.backend.ExceptionHandlers.ResourceNotFound;
 import com.santiwrld.backend.dtos.CartItemDTO;
 import com.santiwrld.backend.dtos.CheckoutRequestDTO;
 import com.santiwrld.backend.dtos.OrderItemDTO;
@@ -25,7 +26,7 @@ public class OrderService {
         List<OrderItem> lines = new ArrayList<>();
         BigDecimal total = BigDecimal.ZERO;
         for (CartItemDTO line : order.getItems()) {
-            Product p = productRepository.findBySlug(line.getSlug()).orElseThrow(() -> new RuntimeException("Product not found"));
+            Product p = productRepository.findBySlug(line.getSlug()).orElseThrow(() -> new ResourceNotFound("Product not found"));
             OrderItem oi = new OrderItem(); // or builder
             oi.setProduct(p);
             oi.setProductName(p.getProductName());
@@ -63,7 +64,7 @@ public class OrderService {
 
     public Order getByReference(String reference) {
         Order ref = orderRepository.findByOrderReference(reference)
-                .orElseThrow(()-> new RuntimeException("Order reference not found"));
+                .orElseThrow(()-> new ResourceNotFound("Order reference not found"));
 
         return ref;
     }
